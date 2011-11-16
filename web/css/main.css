@@ -34,14 +34,21 @@
 .edit-media-item
 {
     background-color: silver;
-    padding: 4px;
-    margin: 2px 0;
+    float: left;
+    height: 100px;
+    margin: 2px;
+    padding: 1px;
+    width: 100px;
+}
+
+#add-other-images
+{
+    clear: left;
 }
 
 .div-form fieldset
 {
     margin: 15px 0;
-    width: 432px;
 }
 
 .config-fields

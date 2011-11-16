@@ -49,7 +49,7 @@ class mediaActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-      if(!$this->hasRequestParameter('parent'))
+      if(!$this->hasRequestParameter('id'))
       {
           $request->checkCSRFProtection();
       }    
@@ -64,7 +64,7 @@ class mediaActions extends sfActions
     
     if ($this->hasRequestParameter('parent'))
     {
-        $configId = $this->getRequestParameter('config');
+        $configId = $this->getRequestParameter('parent');
         $this->redirect('config/editconfig?id='.$configId);
     }
     else

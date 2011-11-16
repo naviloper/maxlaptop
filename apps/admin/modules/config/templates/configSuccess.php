@@ -224,51 +224,9 @@ $(function() {
         <?php endif; ?>
             
             
-        <div class="config-fields">
-        <!-- Image section start -->
-        <h2>Model images</h2>
-        <fieldset>
-            <legend>Images</legend>
-            
-            <div id="model-images">
-            <div class="main-image">
-                <label>Main Image</label>
-                <?php if ($media = MediaPeer::getMainImage($model->getId(), 'Model')): ?>
-                    <div class="edit-media-item">
-                        <?php echo image_tag(public_path('uploads/th_'.$media->getId().'.'.$media->getExt()), array()) ?>
-                        <div><?php echo link_to('Delete', 'media/delete?id='.$media->getId().'&parent='.$model->getId()) ?></div>
-                    </div>
-                <?php else: ?>
-                    <?php echo input_file_tag('main_image', array()) ?>
-                <?php endif; ?>                
-            </div>            
-            
-            <div class="other-image">
-                <fieldset style="width: 360px;">
-                    <legend>Other Images</legend>
-                    <?php $medias = MediaPeer::getOtherImages($model->getId(), 'Model') ?>
-                    <?php foreach ($medias as $media): ?>
-                        <div class="edit-media-item">
-                            <?php echo image_tag(public_path('uploads/th_'.$media->getId().'.'.$media->getExt()), array()) ?>
-                            <div><?php echo link_to('Delete', 'media/delete?id='.$media->getId().'&parent='.$config->getId()) ?></div>
-                        </div>
-                    <?php endforeach; ?>
-                    
-                    <div id="add-other-images">
-                        <div><input type="file" name="other_images[0]" ></input></div>                        
-                    </div>
-                    <div style="margin-top: 20px;"><?php echo link_to_function('Add new image', 'addNewImage()') ?></div>
-                    
-                </fieldset>                
-            </div>
-            </div>
-            
-        </fieldset>
         
-        <!-- Image section end -->    
                 
-        </div>
-        
+       
         
         <div class="config-fields">
         <h2>Configurations</h2>
@@ -298,16 +256,59 @@ $(function() {
         </fieldset>
         <?php endforeach; ?>
         
-        
-        
-        
-        <div>
-            <input type="submit" value="Save">
-            <?php echo input_hidden_tag('save_and_new', 'false') ?>
-            <input type="submit" value="Save and new" onclick="saveAndNew()">
         </div>
         
-        </div>
+        <div class="config-fields">    
+        <!-- Image section start -->
+        <h2>Model images</h2>
+        <fieldset>
+            <legend>Images</legend>
+            
+            <div id="model-images">
+            <div class="main-image">
+                <label>Main Image</label>
+                <?php if ($media = MediaPeer::getMainImage($model->getId(), 'Model')): ?>
+                    <div class="edit-media-item">
+                        <?php echo image_tag(public_path('uploads/th_'.$media->getId().'.'.$media->getExt()), array()) ?>
+                        <div><?php echo link_to('Delete', 'media/delete?id='.$media->getId().'&parent='.$config->getId(), array('confirm'=>'Are you sure?')) ?></div>
+                    </div>
+                <?php else: ?>
+                    <?php echo input_file_tag('main_image', array()) ?>
+                <?php endif; ?>                
+            </div>            
+            
+            <div class="other-image">
+                <fieldset>
+                    <legend>Other Images</legend>
+                    <?php $medias = MediaPeer::getOtherImages($model->getId(), 'Model') ?>
+                    <?php foreach ($medias as $media): ?>
+                        <div class="edit-media-item">
+                            <?php echo image_tag(public_path('uploads/th_'.$media->getId().'.'.$media->getExt()), array()) ?>
+                            <div><?php echo link_to('Delete', 'media/delete?id='.$media->getId().'&parent='.$config->getId(), array('confirm'=>'Are you sure?')) ?></div>
+                        </div>
+                    <?php endforeach; ?>
+                    
+                    <div id="add-other-images">
+                        <div><input type="file" name="other_images[0]" ></input></div>                        
+                    </div>
+                    <div style="margin-top: 20px;"><?php echo link_to_function('Add new image', 'addNewImage()') ?></div>
+                    
+                </fieldset>                
+            </div>
+            </div>
+            
+        </fieldset>
         
-    </div>    
+        <!-- Image section end --> 
+        </div>
+    
+    <div class="config-fields">
+        <input type="submit" value="Save">
+        <?php echo input_hidden_tag('save_and_new', 'false') ?>
+        <input type="submit" value="Save and new" onclick="saveAndNew()">
+    </div>
+        
+</div>       
 </form>
+
+        

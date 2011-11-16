@@ -92,7 +92,7 @@ class MediaPeer extends BaseMediaPeer
                 $image->save(sfConfig::get('sf_upload_dir')."/".$media->getId().".".$media->getExt());
 
                 // create thunmbnail
-                $imageTh = new sfThumbnail(150, 150);
+                $imageTh = new sfThumbnail(80, 80);
                 $imageTh->loadFile($file['tmp_name']);
                 $imageTh->save(sfConfig::get('sf_upload_dir')."/th_".$media->getId().".".$media->getExt());
             }

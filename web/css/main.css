@@ -1,0 +1,90 @@
+
+
+.div-form label
+{
+    display: block;
+}
+
+.div-form input, .div-form select
+{
+    width: 130px;    
+}
+
+.div-form-item-float input.add-button
+{
+    width: 24px;
+}
+
+.div-form .div-form-item-float
+{
+    float: left;
+    margin: 0 10px;
+}
+
+.div-form fieldset
+{
+    clear: both;        
+}
+
+.ui-menu-item a.ui-corner-all
+{
+    font-size: 0.7em;
+}
+
+.edit-media-item
+{
+    background-color: silver;
+    padding: 4px;
+    margin: 2px 0;
+}
+
+.div-form fieldset
+{
+    margin: 15px 0;
+    width: 432px;
+}
+
+.config-fields
+{
+    width: 460px;  
+    float: left;
+    padding: 10px 0;
+}
+
+.configs-list
+{
+    float: right;
+    width: 220px;
+    margin-right: 14px;
+    margin-top: 50px;
+}
+
+#config-list-ul li
+{
+    width: 200px;
+    min-height: 30px;
+    padding: 2px;
+    border: 1px solid;
+}
+
+#config-list-tbl
+{
+    width: 100%;  
+    margin-top: 20px;
+}
+
+#config-list-tbl td
+{
+    padding: 10px;
+}
+
+#search-form #tabs li
+{
+    /*font-size: 0.7em;*/
+}
+
+.ui-tabs
+{
+    font-size: 0.9em!important;
+}
+

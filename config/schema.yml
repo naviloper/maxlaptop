@@ -1,0 +1,226 @@
+propel:
+  _attributes:
+    package: lib.model
+    defaultIdMethod: native
+  ads:
+    _attributes: { phpName: Ads }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    user_id: { phpName: UserId, type: BIGINT, size: '20', required: false, foreignTable: sf_guard_user, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    config_id: { phpName: ConfigId, type: BIGINT, size: '20', required: false, foreignTable: config, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    info: { phpName: Info, type: LONGVARCHAR, required: false }
+    price: { phpName: Price, type: BIGINT, size: '20', required: false }
+    rating: { phpName: Rating, type: BIGINT, size: '20', required: false }
+    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
+    _indexes: { user_id_idx: [user_id], config_id_idx: [config_id] }
+  brand:
+    _attributes: { phpName: Brand }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    brand_name: { phpName: BrandName, type: VARCHAR, size: '255', required: true }
+    brand_info: { phpName: BrandInfo, type: LONGVARCHAR, required: false }
+    brand_country: { phpName: BrandCountry, type: VARCHAR, size: '255', required: false }
+    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+    _uniques: { brand_name: [brand_name] }
+  config:
+    _attributes: { phpName: Config }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    model_id: { phpName: ModelId, type: BIGINT, size: '20', required: true, foreignTable: model, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    config_name: { phpName: ConfigName, type: VARCHAR, size: '255', required: false }
+    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+    _indexes: { model_id_idx: [model_id] }
+    
+  config_field:
+    _attributes: { phpName: ConfigField }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    category_id: { phpName: CategoryId, type: BIGINT, size: '20', required: true, foreignTable: config_field_category, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    name: { phpName: Name, type: VARCHAR, size: '255', required: true }
+    html_comment: { phpName: HtmlComment, type: VARCHAR, size: '255', required: false }
+    info: { phpName: Info, type: LONGVARCHAR, required: false }
+    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
+    created_at: ~
+    updated_at: ~
+    
+  config_field_category:
+    _attributes: { phpName: ConfigFieldCategory }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    name: { phpName: Name, type: VARCHAR, size: '255', required: false }
+    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
+    
+  field_value:
+    _attributes: { phpName: FieldValue }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    field_id: { phpName: FieldId, type: BIGINT, size: '20', required: false, foreignTable: config_field, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    config_id: { phpName: ConfigId, type: BIGINT, size: '20', required: false, foreignTable: config, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
+    value: { phpName: Value, type: LONGVARCHAR, required: false }
+    rating: { phpName: Rating, type: BIGINT, size: '20', requierd: false }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+    
+  link:
+    _attributes: { phpName: Link }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    value: { phpName: Value, type: VARCHAR, size: '255', required: false }
+    title: { phpName: Title, type: VARCHAR, size: '255', required: false }
+    href: { phpName: Href, type: LONGVARCHAR, required: false }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+  logs:
+    _attributes: { phpName: Logs }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    query_by: { phpName: QueryBy, type: BIGINT, size: '20', required: false, foreignTable: sf_guard_user, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    check_by: { phpName: CheckBy, type: BIGINT, size: '20', required: false, foreignTable: sf_guard_user, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    query_at: { phpName: QueryAt, type: TIMESTAMP, required: false }
+    check_at: { phpName: CheckAt, type: TIMESTAMP, required: false }
+    status: { phpName: Status, type: LONGVARCHAR, required: false }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+    _indexes: { query_by_idx: [query_by], check_by_idx: [check_by] }
+  media:
+    _attributes: { phpName: Media }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    parent_id: { type: BIGINT, size: '20', required: true }
+    title: { phpName: Title, type: VARCHAR, size: '255', required: true }
+    type: { phpName: Type, type: VARCHAR, size: '255', required: false }
+    class_name: { type: VARCHAR, size: '255', required: false }
+    ext: { type: VARCHAR, size: '255', required: false }
+    is_main: { phpName: IsMain, type: TINYINT, size: '1', required: true }
+    path: { phpName: Path, type: LONGVARCHAR, required: true }
+    created_at: ~
+    updated_at: ~
+  menu:
+    _attributes: { phpName: Menu }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    title: { phpName: Title, type: VARCHAR, size: '255', required: false }
+    slot: { phpName: Slot, type: BIGINT, size: '20', required: false }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+  menu_item:
+    _attributes: { phpName: MenuItem }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    menu_id: { phpName: MenuId, type: BIGINT, size: '20', required: false, foreignTable: menu, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    type: { phpName: Type, type: VARCHAR, size: '255', required: false }
+    ref_id: { phpName: RefId, type: BIGINT, size: '20', required: false }
+    list_order: { phpName: ListOrder, type: BIGINT, size: '20', required: false, defaultValue: '999999' }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+    _indexes: { menu_id_idx: [menu_id] }
+  model:
+    _attributes: { phpName: Model }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    model_name: { phpName: ModelName, type: VARCHAR, size: '255', required: true }
+    model_info: { phpName: ModelInfo, type: LONGVARCHAR, required: false }
+    series_id: { phpName: SeriesId, type: BIGINT, size: '20', required: true, foreignTable: series, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    review_id: { phpName: ReviewId, type: BIGINT, size: '20', required: false, foreignTable: review, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    score_id: { phpName: ScoreId, type: BIGINT, size: '20', required: false, foreignTable: score, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
+    created_at: ~
+    updated_at: ~
+    _indexes: { series_id_idx: [series_id], review_id_idx: [review_id], score_id_idx: [score_id] }
+  page:
+    _attributes: { phpName: Page }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    parent_id: { phpName: ParentId, type: BIGINT, size: '20', required: false, foreignTable: page, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    title: { phpName: Title, type: VARCHAR, size: '255', required: false }
+    keywords: { phpName: Keywords, type: VARCHAR, size: '255', required: false }
+    metadata: { phpName: Metadata, type: LONGVARCHAR, required: false }
+    content: { phpName: Content, type: LONGVARCHAR, required: false }
+    is_published: { phpName: IsPublished, type: TINYINT, size: '1', required: true }
+    p_order: { phpName: POrder, type: BIGINT, size: '20', required: false, defaultValue: '999999' }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+    _indexes: { parent_id_idx: [parent_id] }
+  post:
+    _attributes: { phpName: Post }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    title: { phpName: Title, type: VARCHAR, size: '255', required: false }
+    keywords: { phpName: Keywords, type: VARCHAR, size: '255', required: false }
+    metadata: { phpName: Metadata, type: LONGVARCHAR, required: false }
+    content: { phpName: Content, type: LONGVARCHAR, required: false }
+    is_published: { phpName: IsPublished, type: TINYINT, size: '1', required: true }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+  post_category:
+    _attributes: { phpName: PostCategory }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    name: { phpName: Name, type: VARCHAR, size: '255', required: true }
+    slug: { phpName: Slug, type: VARCHAR, size: '255', required: true }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+    _uniques: { name: [name] }
+  post_category_relation:
+    _attributes: { phpName: PostCategoryRelation }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    post_id: { phpName: PostId, type: BIGINT, size: '20', required: false, foreignTable: post, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    category_id: { phpName: CategoryId, type: BIGINT, size: '20', required: false, foreignTable: post_category, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+    _indexes: { post_id_idx: [post_id], category_id_idx: [category_id] }
+  review:
+    _attributes: { phpName: Review }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    author_id: { phpName: AuthorId, type: BIGINT, size: '20', required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    model_id: { phpName: ModelId, type: BIGINT, size: '20', required: true, foreignTable: model, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    cons: { phpName: Cons, type: LONGVARCHAR, required: false }
+    pros: { phpName: Pros, type: LONGVARCHAR, required: false }
+    rtext: { phpName: Rtext, type: LONGVARCHAR, required: false }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+    _indexes: { author_id_idx: [author_id], model_id_idx: [model_id] }
+  score:
+    _attributes: { phpName: Score }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    user_id: { phpName: UserId, type: BIGINT, size: '20', required: true, foreignTable: sf_guard_user, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    model_id: { phpName: ModelId, type: BIGINT, size: '20', required: true, foreignTable: model, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    overall: { phpName: Overall, type: DOUBLE, required: false }
+    design: { phpName: Design, type: DOUBLE, required: false }
+    features: { phpName: Features, type: DOUBLE, required: false }
+    performance: { phpName: Performance, type: DOUBLE, required: false }
+    battery: { phpName: Battery, type: DOUBLE, required: false }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+    _indexes: { user_id_idx: [user_id], model_id_idx: [model_id] }
+  series:
+    _attributes: { phpName: Series }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    series_name: { phpName: SeriesName, type: VARCHAR, size: '255', required: true }
+    series_info: { phpName: SeriesInfo, type: VARCHAR, size: '255', required: false }
+    brand_id: { phpName: BrandId, type: BIGINT, size: '20', required: true, foreignTable: brand, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
+    _indexes: { brand_id_idx: [brand_id] }
+  
+  shop:
+    _attributes: { phpName: Shop }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    owner_id: { phpName: OwnerId, type: BIGINT, size: '20', required: false, foreignTable: sf_guard_user, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    info: { phpName: Info, type: LONGVARCHAR, required: false }
+    photo: { phpName: Photo, type: VARCHAR, size: '255', required: false }
+    website: { phpName: Website, type: VARCHAR, size: '255', required: false }
+    email: { phpName: Email, type: VARCHAR, size: '255', required: false }
+    address: { phpName: Address, type: VARCHAR, size: '255', required: false }
+    phone: { phpName: Phone, type: VARCHAR, size: '255', required: false }
+    fax: { phpName: Fax, type: VARCHAR, size: '255', required: false }
+    _indexes: { owner_id_idx: [owner_id] }
+  shop_vitrin:
+    _attributes: { phpName: ShopVitrin }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    shop_id: { phpName: ShopId, type: BIGINT, size: '20', required: false, foreignTable: shop, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    config_id: { phpName: ConfigId, type: BIGINT, size: '20', required: false, foreignTable: config, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    _indexes: { shop_id_idx: [shop_id], config_id_idx: [config_id] }
+  user_meta:
+    _attributes: { phpName: UserMeta }
+    id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
+    user_id: { phpName: UserId, type: BIGINT, size: '20', required: false, foreignTable: sf_guard_user, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    model_id: { phpName: ModelId, type: BIGINT, size: '20', required: false, foreignTable: model, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
+    info: { phpName: Info, type: LONGVARCHAR, required: false }
+    city: { phpName: City, type: BIGINT, size: '20', required: false }
+    _indexes: { user_id_idx: [user_id], model_id_idx: [model_id] }
+    
+  setting:
+    _attributes: { phpName: Setting }
+    key: { phpName: Key, type: VARCHAR, size: '255', primaryKey: true, required: true }
+    value: { phpName: Value, type: VARCHAR, size: '255' }

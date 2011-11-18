@@ -93,7 +93,7 @@ class configActions extends sfActions
 
   public function executeDelete(sfWebRequest $request)
   {
-    $request->checkCSRFProtection();
+    //$request->checkCSRFProtection();
 
     $this->forward404Unless($Config = ConfigPeer::retrieveByPk($request->getParameter('id')), sprintf('Object Config does not exist (%s).', $request->getParameter('id')));
     $Config->delete();

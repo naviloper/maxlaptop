@@ -189,7 +189,8 @@ Displaying results <?php echo $pager->getFirstIndice() ?> to  <?php echo $pager-
           <?php echo $configFieldCategory->getName() ?>          
       </th>
       <?php endforeach;*/ ?>
-      <th>Edit</th>      
+      <th>Edit</th>
+      <th>Delete</th> 
       </tr>
   </thead>
   <tbody>
@@ -205,7 +206,8 @@ Displaying results <?php echo $pager->getFirstIndice() ?> to  <?php echo $pager-
         <?php echo $Config->getConfigFieldCategoryValue($configFieldCategory) ?>
       </td>
       <?php endforeach;*/ ?>
-      <td><a href="<?php echo url_for('config/editconfig?id='.$Config->getId()) ?>">Edit</a></td>      
+      <td style="text-align: center;"><a href="<?php echo url_for('config/editconfig?id='.$Config->getId()) ?>">Edit</a></td>
+      <td style="text-align: center;"><?php echo link_to('X', 'config/delete?id='.$Config->getId(), array('confirm'=>'Are you sure?')) ?></td>
     </tr>
     <?php endforeach; ?>
   </tbody>

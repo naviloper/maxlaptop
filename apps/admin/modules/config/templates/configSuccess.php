@@ -306,6 +306,10 @@ $(function() {
         <input type="submit" value="Save">
         <?php echo input_hidden_tag('save_and_new', 'false') ?>
         <input type="submit" value="Save and new" onclick="saveAndNew()">
+        
+        <?php if (!$isNew): ?>
+            <?php echo button_to('Delete', 'config/delete?id='.$config->getId(), array('confirm'=>'Are you sure?')) ?>
+        <?php endif; ?>
     </div>
         
 </div>       

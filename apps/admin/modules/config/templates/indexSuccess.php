@@ -199,7 +199,7 @@ Displaying results <?php echo $pager->getFirstIndice() ?> to  <?php echo $pager-
       <td><?php echo $Config->getModel()->getSeries()->getBrand()->getBrandName() ?></td>
       <td><?php echo $Config->getModel()->getSeries()->getSeriesName() ?></td>
       <td><?php echo $Config->getModel()->getModelName() ?></td>
-      <td><?php echo $Config->getConfigName() ?></td>
+      <td><?php echo $Config->makeConfigName() ?></td>
       
       <?php /*foreach($configFieldCategories as $configFieldCategory): ?>
       <td>

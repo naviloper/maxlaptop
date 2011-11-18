@@ -90,7 +90,7 @@ class saveconfigAction extends sfAction
             //load config
             $config = ConfigPeer::retrieveByPK($this->configId);
             
-            $config->setConfigName($this->getRequestParameter('name'));
+            //$config->setConfigName($this->getRequestParameter('name'));
             $config->setModel($modelObj);
             $config->save();
             

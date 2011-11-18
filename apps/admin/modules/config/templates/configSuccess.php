@@ -198,23 +198,23 @@ $(function() {
         </div>
         
             
-        <div class="div-form-item-float">
+        <!--<div class="div-form-item-float">
             <label>Configure name</label>    
-            <?php echo input_tag('name', $config->getConfigName()) ?>
-            <?php echo input_hidden_tag('config_id', $configId) ?>
-        </div>
+            <?php //echo input_tag('name', $config->getConfigName()) ?>            
+        </div>-->
+        <?php echo input_hidden_tag('config_id', $configId) ?>
         
         <?php if (!$isNew): ?>
             <div class="configs-list">
-            <div>Available configurations for selected model</div>
+            <div>Available configurations for this model</div>
             
             <div>
                 <ul id="config-list-ul">
                 <?php foreach ($configs as $configList): ?>
                     <?php if ($configList->getId() == $config->getId()): ?>
-                        <li class="li-selected"><strong><?php echo $configList->getConfigName() ?></strong></li>
+                        <li class="li-selected"><strong><?php echo $configList->makeConfigName() ?></strong></li>
                     <?php else: ?>
-                        <li><?php echo link_to($configList->getConfigName(), 'config/editconfig?id='.$configList->getId()) ?></li>
+                        <li><?php echo link_to($configList->makeConfigName(), 'config/editconfig?id='.$configList->getId()) ?></li>
                     <?php endif; ?>
                 <?php endforeach; ?>
                 </ul>
@@ -260,7 +260,7 @@ $(function() {
         
         <div class="config-fields">    
         <!-- Image section start -->
-        <h2>Model images</h2>
+        <h2>Available images for this model</h2>
         <fieldset>
             <legend>Images</legend>
             

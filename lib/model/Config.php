@@ -57,7 +57,25 @@ class Config extends BaseConfig {
     }
     
     
-    
+    public function makeConfigName()
+    {
+        $configName = "Config ";
+        
+        $fieldIds = array(1, 2, 3, 4);
+        
+        $cFieldValues = new Criteria();
+        $cFieldValues->add(FieldValuePeer::CONFIG_ID, $this->getId());
+        $cFieldValues->add(FieldValuePeer::FIELD_ID, $fieldIds, Criteria::IN);
+        
+        $fieldValues = FieldValuePeer::doSelect($cFieldValues);
+        
+        foreach ($fieldValues as $fieldValue)
+        {
+            $configName .= $fieldValue->getValue()." ,";
+        }        
+        
+        return $configName;
+    }
     
 
 } // Config

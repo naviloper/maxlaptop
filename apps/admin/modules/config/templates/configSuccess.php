@@ -75,8 +75,9 @@ $(function() {
 				});
 			},
 			minLength: 0,
-			select: function( event, ui ) {
-				//alert(ui.item.id);
+                        select: function( event, ui ) {
+                            //$("#model").val('');
+                            
 			},
 			open: function() {
 				
@@ -87,6 +88,15 @@ $(function() {
                         change: function(event, ui)
                         {
                             $("#model").val('');
+                            
+                            <?php if (!$isNew): ?>
+                            if (!ui.item) {
+                                 $(this).val('');
+                                 
+                                 alert("In edit mode, you can select \"Series\" only from list.");
+                            }
+                            <?php endif; ?>
+                            
                         }
                     });
                     
@@ -124,7 +134,18 @@ $(function() {
 			},
 			close: function() {
 				
-			}
+			},
+                        change: function(event, ui)
+                        {
+                            <?php if (!$isNew): ?>
+                            if (!ui.item) {
+                                 $(this).val('');
+                                 
+                                 alert("In edit mode, you can select \"Model\" only from list.");
+                            }
+                            <?php endif; ?>
+                            
+                        }
                     });
                     
                 

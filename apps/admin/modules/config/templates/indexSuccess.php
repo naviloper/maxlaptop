@@ -142,7 +142,7 @@ $(function() {
 
 <h1>Configurations</h1>
 
-<a href="<?php echo url_for('config/newconfig') ?>" style="margin: 20px 0; clear: both;">Add new configuration</a>
+<?php echo link_to(image_tag('add-icon.png'), 'config/newconfig', array('title'=>'Add new Config')) ?>
 
 <form action="<?php echo url_for('config/index') ?>" method="get">
     <div class="div-form">
@@ -206,8 +206,8 @@ Displaying results <?php echo $pager->getFirstIndice() ?> to  <?php echo $pager-
         <?php echo $Config->getConfigFieldCategoryValue($configFieldCategory) ?>
       </td>
       <?php endforeach;*/ ?>
-      <td style="text-align: center;"><a href="<?php echo url_for('config/editconfig?id='.$Config->getId()) ?>">Edit</a></td>
-      <td style="text-align: center;"><?php echo link_to('X', 'config/delete?id='.$Config->getId(), array('confirm'=>'Are you sure?')) ?></td>
+      <td style="text-align: center;"><?php echo link_to(image_tag('edit-document.png', array('style'=>'border:none;')), 'config/editconfig?id='.$Config->getId(), array()) ?></td>
+      <td style="text-align: center;"><?php echo link_to(image_tag('delete-icon.png', array('style'=>'border:none;')), 'config/delete?id='.$Config->getId(), array('confirm'=>'Are you sure?')) ?></td>
     </tr>
     <?php endforeach; ?>
   </tbody>

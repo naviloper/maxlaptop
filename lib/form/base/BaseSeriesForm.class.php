@@ -18,7 +18,7 @@ abstract class BaseSeriesForm extends BaseFormPropel
       'series_name' => new sfWidgetFormInputText(),
       'series_info' => new sfWidgetFormInputText(),
       'brand_id'    => new sfWidgetFormPropelChoice(array('model' => 'Brand', 'add_empty' => false)),
-      'weigth'      => new sfWidgetFormInputText(),
+      'weight'      => new sfWidgetFormInputText(),
       'created_at'  => new sfWidgetFormDateTime(),
       'updated_at'  => new sfWidgetFormDateTime(),
     ));
@@ -28,7 +28,7 @@ abstract class BaseSeriesForm extends BaseFormPropel
       'series_name' => new sfValidatorString(array('max_length' => 255)),
       'series_info' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'brand_id'    => new sfValidatorPropelChoice(array('model' => 'Brand', 'column' => 'id')),
-      'weigth'      => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
+      'weight'      => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
       'created_at'  => new sfValidatorDateTime(),
       'updated_at'  => new sfValidatorDateTime(),
     ));

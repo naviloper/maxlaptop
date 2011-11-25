@@ -10,7 +10,7 @@ propel:
     info: { phpName: Info, type: LONGVARCHAR, required: false }
     price: { phpName: Price, type: BIGINT, size: '20', required: false }
     rating: { phpName: Rating, type: BIGINT, size: '20', required: false }
-    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
+    weight: { phpName: Weight, type: INTEGER, size: '11', required: false, defaultValue: '0' }
     _indexes: { user_id_idx: [user_id], config_id_idx: [config_id] }
   brand:
     _attributes: { phpName: Brand }
@@ -18,7 +18,7 @@ propel:
     brand_name: { phpName: BrandName, type: VARCHAR, size: '255', required: true }
     brand_info: { phpName: BrandInfo, type: LONGVARCHAR, required: false }
     brand_country: { phpName: BrandCountry, type: VARCHAR, size: '255', required: false }
-    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
+    weight: { phpName: Weight, type: INTEGER, size: '11', required: false, defaultValue: '0' }
     created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
     updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
     _uniques: { brand_name: [brand_name] }
@@ -27,11 +27,10 @@ propel:
     id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
     model_id: { phpName: ModelId, type: BIGINT, size: '20', required: true, foreignTable: model, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     config_name: { phpName: ConfigName, type: VARCHAR, size: '255', required: false }
-    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
+    weight: { phpName: Weight, type: INTEGER, size: '11', required: false, defaultValue: '0' }
     created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
     updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
     _indexes: { model_id_idx: [model_id] }
-    
   config_field:
     _attributes: { phpName: ConfigField }
     id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
@@ -39,26 +38,25 @@ propel:
     name: { phpName: Name, type: VARCHAR, size: '255', required: true }
     html_comment: { phpName: HtmlComment, type: VARCHAR, size: '255', required: false }
     info: { phpName: Info, type: LONGVARCHAR, required: false }
-    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
-    created_at: ~
-    updated_at: ~
-    
+    weight: { phpName: Weight, type: INTEGER, size: '11', required: false, defaultValue: '0' }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: false }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: false }
+    _indexes: { config_field_FI_1: [category_id] }
   config_field_category:
     _attributes: { phpName: ConfigFieldCategory }
     id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
     name: { phpName: Name, type: VARCHAR, size: '255', required: false }
-    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
-    
+    weight: { phpName: Weight, type: INTEGER, size: '11', required: false, defaultValue: '0' }
   field_value:
     _attributes: { phpName: FieldValue }
     id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
     field_id: { phpName: FieldId, type: BIGINT, size: '20', required: false, foreignTable: config_field, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     config_id: { phpName: ConfigId, type: BIGINT, size: '20', required: false, foreignTable: config, foreignReference: id, onDelete: CASCADE, onUpdate: CASCADE }
     value: { phpName: Value, type: LONGVARCHAR, required: false }
-    rating: { phpName: Rating, type: BIGINT, size: '20', requierd: false }
+    rating: { phpName: Rating, type: BIGINT, size: '20', required: false }
     created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
     updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
-    
+    _indexes: { field_value_FI_1: [field_id], field_value_FI_2: [config_id] }
   link:
     _attributes: { phpName: Link }
     id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
@@ -81,15 +79,15 @@ propel:
   media:
     _attributes: { phpName: Media }
     id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
-    parent_id: { type: BIGINT, size: '20', required: true }
+    parent_id: { phpName: ParentId, type: BIGINT, size: '20', required: true }
     title: { phpName: Title, type: VARCHAR, size: '255', required: true }
     type: { phpName: Type, type: VARCHAR, size: '255', required: false }
-    class_name: { type: VARCHAR, size: '255', required: false }
-    ext: { type: VARCHAR, size: '255', required: false }
-    is_main: { phpName: IsMain, type: TINYINT, size: '1', required: true }
+    class_name: { phpName: ClassName, type: VARCHAR, size: '255', required: false }
+    ext: { phpName: Ext, type: VARCHAR, size: '255', required: false }
+    is_main: { phpName: IsMain, type: BOOLEAN, size: '1', required: true }
     path: { phpName: Path, type: LONGVARCHAR, required: true }
-    created_at: ~
-    updated_at: ~
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: false }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: false }
   menu:
     _attributes: { phpName: Menu }
     id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
@@ -115,9 +113,9 @@ propel:
     series_id: { phpName: SeriesId, type: BIGINT, size: '20', required: true, foreignTable: series, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     review_id: { phpName: ReviewId, type: BIGINT, size: '20', required: false, foreignTable: review, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
     score_id: { phpName: ScoreId, type: BIGINT, size: '20', required: false, foreignTable: score, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
-    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
-    created_at: ~
-    updated_at: ~
+    weight: { phpName: Weight, type: INTEGER, size: '11', required: false, defaultValue: '0' }
+    created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
+    updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
     _indexes: { series_id_idx: [series_id], review_id_idx: [review_id], score_id_idx: [score_id] }
   page:
     _attributes: { phpName: Page }
@@ -127,7 +125,7 @@ propel:
     keywords: { phpName: Keywords, type: VARCHAR, size: '255', required: false }
     metadata: { phpName: Metadata, type: LONGVARCHAR, required: false }
     content: { phpName: Content, type: LONGVARCHAR, required: false }
-    is_published: { phpName: IsPublished, type: TINYINT, size: '1', required: true }
+    is_published: { phpName: IsPublished, type: BOOLEAN, size: '1', required: true }
     p_order: { phpName: POrder, type: BIGINT, size: '20', required: false, defaultValue: '999999' }
     created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
     updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
@@ -139,7 +137,7 @@ propel:
     keywords: { phpName: Keywords, type: VARCHAR, size: '255', required: false }
     metadata: { phpName: Metadata, type: LONGVARCHAR, required: false }
     content: { phpName: Content, type: LONGVARCHAR, required: false }
-    is_published: { phpName: IsPublished, type: TINYINT, size: '1', required: true }
+    is_published: { phpName: IsPublished, type: BOOLEAN, size: '1', required: true }
     created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
     updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
   post_category:
@@ -188,11 +186,14 @@ propel:
     series_name: { phpName: SeriesName, type: VARCHAR, size: '255', required: true }
     series_info: { phpName: SeriesInfo, type: VARCHAR, size: '255', required: false }
     brand_id: { phpName: BrandId, type: BIGINT, size: '20', required: true, foreignTable: brand, foreignReference: id, onDelete: RESTRICT, onUpdate: RESTRICT }
-    weigth: { phpName: Weight, type: integer, required: false, default: 0 }
+    weight: { phpName: Weight, type: INTEGER, size: '11', required: false, defaultValue: '0' }
     created_at: { phpName: CreatedAt, type: TIMESTAMP, required: true }
     updated_at: { phpName: UpdatedAt, type: TIMESTAMP, required: true }
     _indexes: { brand_id_idx: [brand_id] }
-  
+  setting:
+    _attributes: { phpName: Setting }
+    key: { phpName: Key, type: VARCHAR, size: '255', primaryKey: true, required: true }
+    value: { phpName: Value, type: VARCHAR, size: '255', required: false }
   shop:
     _attributes: { phpName: Shop }
     id: { phpName: Id, type: BIGINT, size: '20', primaryKey: true, autoIncrement: true, required: true }
@@ -219,8 +220,3 @@ propel:
     info: { phpName: Info, type: LONGVARCHAR, required: false }
     city: { phpName: City, type: BIGINT, size: '20', required: false }
     _indexes: { user_id_idx: [user_id], model_id_idx: [model_id] }
-    
-  setting:
-    _attributes: { phpName: Setting }
-    key: { phpName: Key, type: VARCHAR, size: '255', primaryKey: true, required: true }
-    value: { phpName: Value, type: VARCHAR, size: '255' }

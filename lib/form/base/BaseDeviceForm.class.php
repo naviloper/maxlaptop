@@ -28,7 +28,7 @@ abstract class BaseDeviceForm extends BaseFormPropel
       'type_id'    => new sfValidatorPropelChoice(array('model' => 'DeviceType', 'column' => 'id')),
       'name'       => new sfValidatorString(array('max_length' => 255)),
       'info'       => new sfValidatorString(),
-      'rating'     => new sfValidatorInteger(array('min' => -9.22337203685E+18, 'max' => 9.22337203685E+18)),
+      'rating'     => new sfValidatorInteger(array('min' => -9.2233720368548E+18, 'max' => 9.2233720368548E+18)),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
     ));

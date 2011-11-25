@@ -20,7 +20,7 @@ abstract class BaseAdsForm extends BaseFormPropel
       'info'      => new sfWidgetFormTextarea(),
       'price'     => new sfWidgetFormInputText(),
       'rating'    => new sfWidgetFormInputText(),
-      'weigth'    => new sfWidgetFormInputText(),
+      'weight'    => new sfWidgetFormInputText(),
     ));
 
     $this->setValidators(array(
@@ -28,9 +28,9 @@ abstract class BaseAdsForm extends BaseFormPropel
       'user_id'   => new sfValidatorPropelChoice(array('model' => 'sfGuardUser', 'column' => 'id', 'required' => false)),
       'config_id' => new sfValidatorPropelChoice(array('model' => 'Config', 'column' => 'id', 'required' => false)),
       'info'      => new sfValidatorString(array('required' => false)),
-      'price'     => new sfValidatorInteger(array('min' => -9.22337203685E+18, 'max' => 9.22337203685E+18, 'required' => false)),
-      'rating'    => new sfValidatorInteger(array('min' => -9.22337203685E+18, 'max' => 9.22337203685E+18, 'required' => false)),
-      'weigth'    => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
+      'price'     => new sfValidatorInteger(array('min' => -9.2233720368548E+18, 'max' => 9.2233720368548E+18, 'required' => false)),
+      'rating'    => new sfValidatorInteger(array('min' => -9.2233720368548E+18, 'max' => 9.2233720368548E+18, 'required' => false)),
+      'weight'    => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('ads[%s]');

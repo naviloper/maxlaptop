@@ -17,5 +17,7 @@
  * @package    lib.model
  */
 class BrandPeer extends BaseBrandPeer {
-
+    static public function doSelect(Criteria $criteria, PropelPDO $con = null) {
+        return parent::doSelect($criteria->addAscendingOrderByColumn(BrandPeer::WEIGHT), $con);
+    }
 } // BrandPeer

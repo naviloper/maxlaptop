@@ -43,5 +43,9 @@ class SeriesPeer extends BaseSeriesPeer {
         
         return $series;
     }
+    
+    static public function doSelect(Criteria $criteria, PropelPDO $con = null) {
+        return parent::doSelect($criteria->addAscendingOrderByColumn(SeriesPeer::WEIGHT), $con);
+    }
 
 } // SeriesPeer

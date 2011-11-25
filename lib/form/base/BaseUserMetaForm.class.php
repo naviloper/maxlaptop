@@ -26,7 +26,7 @@ abstract class BaseUserMetaForm extends BaseFormPropel
       'user_id'  => new sfValidatorPropelChoice(array('model' => 'sfGuardUser', 'column' => 'id', 'required' => false)),
       'model_id' => new sfValidatorPropelChoice(array('model' => 'Model', 'column' => 'id', 'required' => false)),
       'info'     => new sfValidatorString(array('required' => false)),
-      'city'     => new sfValidatorInteger(array('min' => -9.22337203685E+18, 'max' => 9.22337203685E+18, 'required' => false)),
+      'city'     => new sfValidatorInteger(array('min' => -9.2233720368548E+18, 'max' => 9.2233720368548E+18, 'required' => false)),
     ));
 
     $this->widgetSchema->setNameFormat('user_meta[%s]');

@@ -258,7 +258,7 @@ $(function() {
             <?php
             $c = new Criteria();
             $c->add(ConfigFieldPeer::CATEGORY_ID, $configFieldCategory->getId());
-            $c->addDescendingOrderByColumn(ConfigFieldPeer::WEIGTH);
+            $c->addDescendingOrderByColumn(ConfigFieldPeer::WEIGHT);
             
             $configFields = ConfigFieldPeer::doSelect($c);
             ?>

@@ -13,4 +13,45 @@ require_once dirname(__FILE__).'/../lib/pageGeneratorHelper.class.php';
  */
 class pageActions extends autoPageActions
 {
+  public function executeBatchPublish(sfWebRequest $request, $set=true)
+  {
+    $ids = $request->getParameter('ids');
+ 
+    $c = new Criteria();
+    $q = PagePeer::retrieveByPKs($ids);
+ 
+    foreach ($q as $page)
+    {
+      $page->setIsPublished( $set );
+      $page->save();
+    }
+ 
+    $this->getUser()->setFlash('notice', 'The selected pages have been '.($set?'published':'drafted').' successfully.');
+ 
+    $this->redirect('page');
+  }
+  
+  public function executeBatchDraft(sfWebRequest $request)
+  {
+  	$this->executeBatchPublish($request, false);
+  }
+  
+  public function executePublish(sfWebRequest $request, $set=true)
+  {
+    $id = $request->getParameter('id');
+  	
+    $c = new Criteria();
+    $page = PagePeer::retrieveByPK($id);
+
+    $page->setIsPublished( $set );
+    $page->save();
+    
+    $this->getUser()->setFlash('notice', 'The selected page has been '.($set?'published':'drafted').' successfully.');
+    $this->redirect('page');
+  }
+  
+  public function executeDraft(sfWebRequest $request, $set=true)
+  {
+  	$this->executePublish($request, false);
+  }
 }

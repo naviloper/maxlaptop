@@ -20,7 +20,7 @@ abstract class BaseModelForm extends BaseFormPropel
       'series_id'  => new sfWidgetFormPropelChoice(array('model' => 'Series', 'add_empty' => false)),
       'review_id'  => new sfWidgetFormPropelChoice(array('model' => 'Review', 'add_empty' => true)),
       'score_id'   => new sfWidgetFormPropelChoice(array('model' => 'Score', 'add_empty' => true)),
-      'weigth'     => new sfWidgetFormInputText(),
+      'weight'     => new sfWidgetFormInputText(),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
     ));
@@ -32,9 +32,9 @@ abstract class BaseModelForm extends BaseFormPropel
       'series_id'  => new sfValidatorPropelChoice(array('model' => 'Series', 'column' => 'id')),
       'review_id'  => new sfValidatorPropelChoice(array('model' => 'Review', 'column' => 'id', 'required' => false)),
       'score_id'   => new sfValidatorPropelChoice(array('model' => 'Score', 'column' => 'id', 'required' => false)),
-      'weigth'     => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
-      'created_at' => new sfValidatorDateTime(array('required' => false)),
-      'updated_at' => new sfValidatorDateTime(array('required' => false)),
+      'weight'     => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
+      'created_at' => new sfValidatorDateTime(),
+      'updated_at' => new sfValidatorDateTime(),
     ));
 
     $this->widgetSchema->setNameFormat('model[%s]');

@@ -10,4 +10,5 @@
  */
 class BaseForm extends sfFormSymfony
 {
+
 }

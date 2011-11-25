@@ -19,7 +19,7 @@ abstract class BaseConfigFieldForm extends BaseFormPropel
       'name'         => new sfWidgetFormInputText(),
       'html_comment' => new sfWidgetFormInputText(),
       'info'         => new sfWidgetFormTextarea(),
-      'weigth'       => new sfWidgetFormInputText(),
+      'weight'       => new sfWidgetFormInputText(),
       'created_at'   => new sfWidgetFormDateTime(),
       'updated_at'   => new sfWidgetFormDateTime(),
     ));
@@ -30,7 +30,7 @@ abstract class BaseConfigFieldForm extends BaseFormPropel
       'name'         => new sfValidatorString(array('max_length' => 255)),
       'html_comment' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'info'         => new sfValidatorString(array('required' => false)),
-      'weigth'       => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
+      'weight'       => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
       'created_at'   => new sfValidatorDateTime(array('required' => false)),
       'updated_at'   => new sfValidatorDateTime(array('required' => false)),
     ));

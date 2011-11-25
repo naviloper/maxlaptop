@@ -17,22 +17,36 @@
  * @package    lib.model
  */
 class Page extends BasePage {
+    
+    function getParent(){
+        return PagePeer::retrieveByPK($this->parent_id);	
+    }
 
-	/**
-	 * Initializes internal state of Page object.
-	 * @see        parent::__construct()
-	 */
-	public function __construct()
-	{
-		// Make sure that parent constructor is always invoked, since that
-		// is where any default values for this object are set.
-		parent::__construct();
-	}
-        
-        
-        public function __toString()
-        {
-            return $this->getTitle();
-        }
+    function getChildren(){
+        $c = new Criteria();
+        return PagePeer::doSelect($c->add(PagePeer::PARENT_ID,$this->id));
+    }
+
+    function getSummary(){
+        return strip_tags(substr($this->getContent(),0,100)."...");
+    }
+
+
+    /**
+     * Initializes internal state of Page object.
+     * @see        parent::__construct()
+     */
+    public function __construct()
+    {
+            // Make sure that parent constructor is always invoked, since that
+            // is where any default values for this object are set.
+            parent::__construct();
+    }
+
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 
 } // Page

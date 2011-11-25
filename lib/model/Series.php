@@ -19,7 +19,11 @@
 class Series extends BaseSeries {
     
     public function __toString() {
-        return $this->getSeriesName();
+        return $this->getName();
+    }
+    
+    public function getName(){
+        return $this->getBrand()->getBrandName().' '.$this->getSeriesName();
     }
 
 } // Series

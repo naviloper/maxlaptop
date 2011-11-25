@@ -13,12 +13,12 @@ abstract class BaseConfigFieldCategoryFormFilter extends BaseFormFilterPropel
   {
     $this->setWidgets(array(
       'name'   => new sfWidgetFormFilterInput(),
-      'weigth' => new sfWidgetFormFilterInput(),
+      'weight' => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
       'name'   => new sfValidatorPass(array('required' => false)),
-      'weigth' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'weight' => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('config_field_category_filters[%s]');
@@ -38,7 +38,7 @@ abstract class BaseConfigFieldCategoryFormFilter extends BaseFormFilterPropel
     return array(
       'id'     => 'Number',
       'name'   => 'Text',
-      'weigth' => 'Number',
+      'weight' => 'Number',
     );
   }
 }

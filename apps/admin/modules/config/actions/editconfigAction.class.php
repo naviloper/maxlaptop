@@ -26,7 +26,7 @@ class editconfigAction extends sfAction
         $this->selectedBrand = $this->series->getBrandId();
         
         $cFieldCat = new Criteria();
-        $cFieldCat->addDescendingOrderByColumn(ConfigFieldCategoryPeer::WEIGTH);
+        $cFieldCat->addDescendingOrderByColumn(ConfigFieldCategoryPeer::WEIGHT);
         
         $this->configFieldCategories = ConfigFieldCategoryPeer::doselect($cFieldCat);
         

@@ -51,7 +51,7 @@ class newconfigAction extends sfAction
         $this->selectedBrand = null;
         
         $cFieldCat = new Criteria();
-        $cFieldCat->addDescendingOrderByColumn(ConfigFieldCategoryPeer::WEIGTH);
+        $cFieldCat->addDescendingOrderByColumn(ConfigFieldCategoryPeer::WEIGHT);
         
         $this->configFieldCategories = ConfigFieldCategoryPeer::doselect($cFieldCat);
         

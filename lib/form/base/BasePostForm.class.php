@@ -19,7 +19,7 @@ abstract class BasePostForm extends BaseFormPropel
       'keywords'     => new sfWidgetFormInputText(),
       'metadata'     => new sfWidgetFormTextarea(),
       'content'      => new sfWidgetFormTextarea(),
-      'is_published' => new sfWidgetFormInputText(),
+      'is_published' => new sfWidgetFormInputCheckbox(),
       'created_at'   => new sfWidgetFormDateTime(),
       'updated_at'   => new sfWidgetFormDateTime(),
     ));
@@ -30,7 +30,7 @@ abstract class BasePostForm extends BaseFormPropel
       'keywords'     => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'metadata'     => new sfValidatorString(array('required' => false)),
       'content'      => new sfValidatorString(array('required' => false)),
-      'is_published' => new sfValidatorInteger(array('min' => -128, 'max' => 127)),
+      'is_published' => new sfValidatorBoolean(),
       'created_at'   => new sfValidatorDateTime(),
       'updated_at'   => new sfValidatorDateTime(),
     ));

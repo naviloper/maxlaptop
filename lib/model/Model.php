@@ -19,7 +19,10 @@
 class Model extends BaseModel {
     
     public function __toString() {
-        return $this->getModelName();
+        return $this->getName();
     }
-
+    
+    public function getName(){
+        return $this->getSeries()->getName().' '.$this->getModelName();
+    }
 } // Model

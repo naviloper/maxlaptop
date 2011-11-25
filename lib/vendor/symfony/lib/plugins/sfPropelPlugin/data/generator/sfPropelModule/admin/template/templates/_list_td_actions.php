@@ -7,6 +7,9 @@
 <?php elseif ('_edit' == $name): ?>
     <?php echo $this->addCredentialCondition('[?php echo $helper->linkToEdit($'.$this->getSingularName().', '.$this->asPhp($params).') ?]', $params) ?>
 
+<?php elseif ('publish' == $name): ?>
+    <?php echo $this->addCredentialCondition('[?php echo $helper->linkToPublish($'.$this->getSingularName().', '.$this->asPhp($params).') ?]', $params) ?>
+
 <?php else: ?>
     <li class="sf_admin_action_<?php echo $params['class_suffix'] ?>">
       <?php echo $this->addCredentialCondition($this->getLinkToAction($name, $params, true), $params) ?>

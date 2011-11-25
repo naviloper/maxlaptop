@@ -28,7 +28,7 @@ abstract class BaseFieldValueForm extends BaseFormPropel
       'field_id'   => new sfValidatorPropelChoice(array('model' => 'ConfigField', 'column' => 'id', 'required' => false)),
       'config_id'  => new sfValidatorPropelChoice(array('model' => 'Config', 'column' => 'id', 'required' => false)),
       'value'      => new sfValidatorString(array('required' => false)),
-      'rating'     => new sfValidatorInteger(array('min' => -9.22337203685E+18, 'max' => 9.22337203685E+18, 'required' => false)),
+      'rating'     => new sfValidatorInteger(array('min' => -9.2233720368548E+18, 'max' => 9.2233720368548E+18, 'required' => false)),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
     ));

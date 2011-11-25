@@ -14,7 +14,7 @@ abstract class BaseConfigFormFilter extends BaseFormFilterPropel
     $this->setWidgets(array(
       'model_id'    => new sfWidgetFormPropelChoice(array('model' => 'Model', 'add_empty' => true)),
       'config_name' => new sfWidgetFormFilterInput(),
-      'weigth'      => new sfWidgetFormFilterInput(),
+      'weight'      => new sfWidgetFormFilterInput(),
       'created_at'  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
       'updated_at'  => new sfWidgetFormFilterDate(array('from_date' => new sfWidgetFormDate(), 'to_date' => new sfWidgetFormDate(), 'with_empty' => false)),
     ));
@@ -22,7 +22,7 @@ abstract class BaseConfigFormFilter extends BaseFormFilterPropel
     $this->setValidators(array(
       'model_id'    => new sfValidatorPropelChoice(array('required' => false, 'model' => 'Model', 'column' => 'id')),
       'config_name' => new sfValidatorPass(array('required' => false)),
-      'weigth'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'weight'      => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'created_at'  => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
       'updated_at'  => new sfValidatorDateRange(array('required' => false, 'from_date' => new sfValidatorDate(array('required' => false)), 'to_date' => new sfValidatorDate(array('required' => false)))),
     ));
@@ -45,7 +45,7 @@ abstract class BaseConfigFormFilter extends BaseFormFilterPropel
       'id'          => 'Number',
       'model_id'    => 'ForeignKey',
       'config_name' => 'Text',
-      'weigth'      => 'Number',
+      'weight'      => 'Number',
       'created_at'  => 'Date',
       'updated_at'  => 'Date',
     );

@@ -20,7 +20,7 @@ abstract class BaseMediaForm extends BaseFormPropel
       'type'       => new sfWidgetFormInputText(),
       'class_name' => new sfWidgetFormInputText(),
       'ext'        => new sfWidgetFormInputText(),
-      'is_main'    => new sfWidgetFormInputText(),
+      'is_main'    => new sfWidgetFormInputCheckbox(),
       'path'       => new sfWidgetFormTextarea(),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
@@ -28,12 +28,12 @@ abstract class BaseMediaForm extends BaseFormPropel
 
     $this->setValidators(array(
       'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
-      'parent_id'  => new sfValidatorInteger(array('min' => -9.22337203685E+18, 'max' => 9.22337203685E+18)),
+      'parent_id'  => new sfValidatorInteger(array('min' => -9.2233720368548E+18, 'max' => 9.2233720368548E+18)),
       'title'      => new sfValidatorString(array('max_length' => 255)),
       'type'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'class_name' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
       'ext'        => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'is_main'    => new sfValidatorInteger(array('min' => -128, 'max' => 127)),
+      'is_main'    => new sfValidatorBoolean(),
       'path'       => new sfValidatorString(),
       'created_at' => new sfValidatorDateTime(array('required' => false)),
       'updated_at' => new sfValidatorDateTime(array('required' => false)),

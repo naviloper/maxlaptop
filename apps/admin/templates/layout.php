@@ -26,8 +26,8 @@
                         <div class="art-header-png"></div>
                         <div class="art-header-jpeg"></div>
                     <div class="art-logo">
-                        <h1 id="name-text" class="art-logo-name"><a href="<?php echo url_for('@homepage') ?>">MAXLAPTOP.COM</a></h1>
-                     <h2 id="slogan-text" class="art-logo-text">maxlaptop slogan</h2>
+                        <h2 id="name-text" class="art-logo-name"><a href="<?php echo url_for('@homepage') ?>">MAXLAPTOP.COM</a></h2>
+                     <h2 id="slogan-text" class="art-logo-text">Admin Page</h2>
                     </div>
                 </div>
                 <div class="art-content-layout">

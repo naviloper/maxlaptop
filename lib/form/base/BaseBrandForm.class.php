@@ -18,7 +18,7 @@ abstract class BaseBrandForm extends BaseFormPropel
       'brand_name'    => new sfWidgetFormInputText(),
       'brand_info'    => new sfWidgetFormTextarea(),
       'brand_country' => new sfWidgetFormInputText(),
-      'weigth'        => new sfWidgetFormInputText(),
+      'weight'        => new sfWidgetFormInputText(),
       'created_at'    => new sfWidgetFormDateTime(),
       'updated_at'    => new sfWidgetFormDateTime(),
     ));
@@ -28,7 +28,7 @@ abstract class BaseBrandForm extends BaseFormPropel
       'brand_name'    => new sfValidatorString(array('max_length' => 255)),
       'brand_info'    => new sfValidatorString(array('required' => false)),
       'brand_country' => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'weigth'        => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
+      'weight'        => new sfValidatorInteger(array('min' => -2147483648, 'max' => 2147483647, 'required' => false)),
       'created_at'    => new sfValidatorDateTime(),
       'updated_at'    => new sfValidatorDateTime(),
     ));

@@ -17,7 +17,7 @@ abstract class BaseAdsFormFilter extends BaseFormFilterPropel
       'info'      => new sfWidgetFormFilterInput(),
       'price'     => new sfWidgetFormFilterInput(),
       'rating'    => new sfWidgetFormFilterInput(),
-      'weigth'    => new sfWidgetFormFilterInput(),
+      'weight'    => new sfWidgetFormFilterInput(),
     ));
 
     $this->setValidators(array(
@@ -26,7 +26,7 @@ abstract class BaseAdsFormFilter extends BaseFormFilterPropel
       'info'      => new sfValidatorPass(array('required' => false)),
       'price'     => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
       'rating'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
-      'weigth'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
+      'weight'    => new sfValidatorSchemaFilter('text', new sfValidatorInteger(array('required' => false))),
     ));
 
     $this->widgetSchema->setNameFormat('ads_filters[%s]');
@@ -50,7 +50,7 @@ abstract class BaseAdsFormFilter extends BaseFormFilterPropel
       'info'      => 'Text',
       'price'     => 'Number',
       'rating'    => 'Number',
-      'weigth'    => 'Number',
+      'weight'    => 'Number',
     );
   }
 }

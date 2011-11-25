@@ -49,7 +49,7 @@ class configActions extends sfActions
     
     //get config columns
     $c = new Criteria();
-    $c->addDescendingOrderByColumn(ConfigFieldCategoryPeer::WEIGTH);
+    $c->addDescendingOrderByColumn(ConfigFieldCategoryPeer::WEIGHT);
     
     $this->configFieldCategories = ConfigFieldCategoryPeer::doSelect($c);
     

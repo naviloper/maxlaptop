@@ -10,4 +10,11 @@
  */
 class pageGeneratorHelper extends BasePageGeneratorHelper
 {
+  public function linkToPublish($object, $params)
+  {
+  	if(!$object->getIsPublished())
+    	return '<li class="sf_admin_action_publish">'.link_to(__("Publish", array(), 'sf_admin'),"page/publish?id=".$object->getId()).'</li>';
+    else
+        return '<li class="sf_admin_action_draft">'.link_to(__("Draft", array(), 'sf_admin'),"page/draft?id=".$object->getId()).'</li>';
+  }
 }

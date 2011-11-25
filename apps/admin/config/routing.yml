@@ -1,3 +1,48 @@
+config_field:
+  class: sfPropelRouteCollection
+  options:
+    model:                ConfigField
+    module:               configfield
+    prefix_path:          /configfield
+    column:               id
+    with_wildcard_routes: true
+
+config_field_category:
+  class: sfPropelRouteCollection
+  options:
+    model:                ConfigFieldCategory
+    module:               configfieldcategory
+    prefix_path:          /configfieldcategory
+    column:               id
+    with_wildcard_routes: true
+
+model:
+  class: sfPropelRouteCollection
+  options:
+    model:                Model
+    module:               model
+    prefix_path:          /model
+    column:               id
+    with_wildcard_routes: true
+
+brand:
+  class: sfPropelRouteCollection
+  options:
+    model:                Brand
+    module:               brand
+    prefix_path:          /brand
+    column:               id
+    with_wildcard_routes: true
+
+series:
+  class: sfPropelRouteCollection
+  options:
+    model:                Series
+    module:               series
+    prefix_path:          /series
+    column:               id
+    with_wildcard_routes: true
+
 page:
   class: sfPropelRouteCollection
   options:

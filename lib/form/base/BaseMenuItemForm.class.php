@@ -27,8 +27,8 @@ abstract class BaseMenuItemForm extends BaseFormPropel
       'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->getId()), 'empty_value' => $this->getObject()->getId(), 'required' => false)),
       'menu_id'    => new sfValidatorPropelChoice(array('model' => 'Menu', 'column' => 'id', 'required' => false)),
       'type'       => new sfValidatorString(array('max_length' => 255, 'required' => false)),
-      'ref_id'     => new sfValidatorInteger(array('min' => -9.22337203685E+18, 'max' => 9.22337203685E+18, 'required' => false)),
-      'list_order' => new sfValidatorInteger(array('min' => -9.22337203685E+18, 'max' => 9.22337203685E+18, 'required' => false)),
+      'ref_id'     => new sfValidatorInteger(array('min' => -9.2233720368548E+18, 'max' => 9.2233720368548E+18, 'required' => false)),
+      'list_order' => new sfValidatorInteger(array('min' => -9.2233720368548E+18, 'max' => 9.2233720368548E+18, 'required' => false)),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
     ));

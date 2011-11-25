@@ -18,7 +18,7 @@ CREATE TABLE `ads`
 	`info` TEXT,
 	`price` BIGINT(20),
 	`rating` BIGINT(20),
-	`weigth` INTEGER default 0,
+	`weight` INTEGER(11) default 0,
 	PRIMARY KEY (`id`),
 	KEY `user_id_idx`(`user_id`),
 	KEY `config_id_idx`(`config_id`),
@@ -47,7 +47,7 @@ CREATE TABLE `brand`
 	`brand_name` VARCHAR(255)  NOT NULL,
 	`brand_info` TEXT,
 	`brand_country` VARCHAR(255),
-	`weigth` INTEGER default 0,
+	`weight` INTEGER(11) default 0,
 	`created_at` DATETIME  NOT NULL,
 	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
@@ -66,7 +66,7 @@ CREATE TABLE `config`
 	`id` BIGINT(20)  NOT NULL AUTO_INCREMENT,
 	`model_id` BIGINT(20)  NOT NULL,
 	`config_name` VARCHAR(255),
-	`weigth` INTEGER default 0,
+	`weight` INTEGER(11) default 0,
 	`created_at` DATETIME  NOT NULL,
 	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
@@ -92,11 +92,11 @@ CREATE TABLE `config_field`
 	`name` VARCHAR(255)  NOT NULL,
 	`html_comment` VARCHAR(255),
 	`info` TEXT,
-	`weigth` INTEGER default 0,
+	`weight` INTEGER(11) default 0,
 	`created_at` DATETIME,
 	`updated_at` DATETIME,
 	PRIMARY KEY (`id`),
-	INDEX `config_field_FI_1` (`category_id`),
+	KEY `config_field_FI_1`(`category_id`),
 	CONSTRAINT `config_field_FK_1`
 		FOREIGN KEY (`category_id`)
 		REFERENCES `config_field_category` (`id`)
@@ -115,7 +115,7 @@ CREATE TABLE `config_field_category`
 (
 	`id` BIGINT(20)  NOT NULL AUTO_INCREMENT,
 	`name` VARCHAR(255),
-	`weigth` INTEGER default 0,
+	`weight` INTEGER(11) default 0,
 	PRIMARY KEY (`id`)
 )Type=InnoDB;
 
@@ -136,13 +136,13 @@ CREATE TABLE `field_value`
 	`created_at` DATETIME  NOT NULL,
 	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
-	INDEX `field_value_FI_1` (`field_id`),
+	KEY `field_value_FI_1`(`field_id`),
+	KEY `field_value_FI_2`(`config_id`),
 	CONSTRAINT `field_value_FK_1`
 		FOREIGN KEY (`field_id`)
 		REFERENCES `config_field` (`id`)
 		ON UPDATE CASCADE
 		ON DELETE CASCADE,
-	INDEX `field_value_FI_2` (`config_id`),
 	CONSTRAINT `field_value_FK_2`
 		FOREIGN KEY (`config_id`)
 		REFERENCES `config` (`id`)
@@ -279,9 +279,9 @@ CREATE TABLE `model`
 	`series_id` BIGINT(20)  NOT NULL,
 	`review_id` BIGINT(20),
 	`score_id` BIGINT(20),
-	`weigth` INTEGER default 0,
-	`created_at` DATETIME,
-	`updated_at` DATETIME,
+	`weight` INTEGER(11) default 0,
+	`created_at` DATETIME  NOT NULL,
+	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
 	KEY `series_id_idx`(`series_id`),
 	KEY `review_id_idx`(`review_id`),
@@ -477,7 +477,7 @@ CREATE TABLE `series`
 	`series_name` VARCHAR(255)  NOT NULL,
 	`series_info` VARCHAR(255),
 	`brand_id` BIGINT(20)  NOT NULL,
-	`weigth` INTEGER default 0,
+	`weight` INTEGER(11) default 0,
 	`created_at` DATETIME  NOT NULL,
 	`updated_at` DATETIME  NOT NULL,
 	PRIMARY KEY (`id`),
@@ -487,6 +487,20 @@ CREATE TABLE `series`
 		REFERENCES `brand` (`id`)
 		ON UPDATE RESTRICT
 		ON DELETE RESTRICT
+)Type=InnoDB;
+
+#-----------------------------------------------------------------------------
+#-- setting
+#-----------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS `setting`;
+
+
+CREATE TABLE `setting`
+(
+	`key` VARCHAR(255)  NOT NULL,
+	`value` VARCHAR(255),
+	PRIMARY KEY (`key`)
 )Type=InnoDB;
 
 #-----------------------------------------------------------------------------
@@ -570,20 +584,6 @@ CREATE TABLE `user_meta`
 		REFERENCES `model` (`id`)
 		ON UPDATE RESTRICT
 		ON DELETE RESTRICT
-)Type=InnoDB;
-
-#-----------------------------------------------------------------------------
-#-- setting
-#-----------------------------------------------------------------------------
-
-DROP TABLE IF EXISTS `setting`;
-
-
-CREATE TABLE `setting`
-(
-	`key` VARCHAR(255)  NOT NULL,
-	`value` VARCHAR(255),
-	PRIMARY KEY (`key`)
 )Type=InnoDB;
 
 # This restores the fkey checks, after having unset them earlier

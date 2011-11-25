@@ -1,0 +1,29 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           Brand
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              Brand
+    plural:                Brands
+    route_prefix:          brand
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:        
+        title:   Brands
+        display: [=brand_name]
+        sort:    [weight, asc]
+        object_actions:
+            move_up:     {label: Move Up}
+            move_down:   {label: Move Down}
+            _edit:       ~
+            _delete:     ~
+      filter:  ~
+      form:    ~
+      edit:    ~
+      new:     ~

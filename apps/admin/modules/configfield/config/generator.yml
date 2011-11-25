@@ -1,0 +1,26 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           ConfigField
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              ConfigField
+    plural:                ConfigFields
+    route_prefix:          config_field
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:
+        title:    Config Fields
+        display:  [=name, category, html_comment]
+        sort:     [weight, asc]
+        max_per_page: 50
+      filter:
+        display:  [=name, category_id, html_comment]
+      form:    ~
+      edit:    ~
+      new:     ~

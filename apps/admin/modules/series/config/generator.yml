@@ -1,0 +1,30 @@
+generator:
+  class: sfPropelGenerator
+  param:
+    model_class:           Series
+    theme:                 admin
+    non_verbose_templates: true
+    with_show:             false
+    singular:              Series
+    plural:                Seriess
+    route_prefix:          series
+    with_propel_route:     1
+    actions_base_class:    sfActions
+
+    config:
+      actions: ~
+      fields:  ~
+      list:        
+        title:   Series
+        display: [=name]
+        sort:    [weight, asc]
+        object_actions:
+            move_up:     {label: Move Up}
+            move_down:   {label: Move Down}
+            _edit:       ~
+            _delete:     ~
+      filter:
+        display: [series_name, brand_id]
+      form:    ~
+      edit:    ~
+      new:     ~

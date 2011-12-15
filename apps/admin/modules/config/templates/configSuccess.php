@@ -26,9 +26,35 @@ function addNewImage()
     $("#add-other-images").append(str);
 }
 
+
+function save()
+{
+    if(isValid())
+    {
+        $('#config_form').submit();
+    }
+    else
+        alert("Please fill \"Series\" and \"model\" fields.");   
+}
+
+
 function saveAndNew()
 {
     $('#save_and_new').val('true');
+    save();
+}
+
+function isValid()
+{
+    var errMsg = "";
+    
+    if($('#series').val() && $('#model').val())
+    {
+        return true;
+    }
+    else
+        return false;
+    
 }
 
 
@@ -48,6 +74,8 @@ function loadModelImages(modelId)
 				});
     });
 }
+
+
 
 $(function() {
                 var selectedBrand = $("#brand option:selected").val();
@@ -191,7 +219,7 @@ $(function() {
 });
 </script>
 
-<form action="<?php echo url_for('config/saveconfig') ?>" method="post" enctype="multipart/form-data">
+<form action="<?php echo url_for('config/saveconfig') ?>" method="post" enctype="multipart/form-data" id="config_form">
     <div class="div-form">
         
         <?php if ($isNew): ?>
@@ -324,9 +352,9 @@ $(function() {
         </div>
     
     <div class="config-fields">
-        <input type="submit" value="Save">
+        <?php echo button_to_function('Save', 'save()') ?>
         <?php echo input_hidden_tag('save_and_new', 'false') ?>
-        <input type="submit" value="Save and new" onclick="saveAndNew()">
+        <?php echo button_to_function('Save and New', 'saveAndNew()') ?>
         
         <?php if (!$isNew): ?>
             <?php echo button_to('Delete', 'config/delete?id='.$config->getId(), array('confirm'=>'Are you sure?')) ?>

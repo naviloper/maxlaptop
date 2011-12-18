@@ -16,6 +16,8 @@ foreach ($results as $item)
 
     $resultArr[$counter]['config_name'] = $item->config_name;
     $resultArr[$counter]['config_id'] = $item->id;
+    
+    $resultArr[$counter]['value'] = $item->value;
 
     $counter++;
 }

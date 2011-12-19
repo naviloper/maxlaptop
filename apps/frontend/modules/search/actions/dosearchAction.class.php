@@ -4,17 +4,34 @@ class dosearchAction extends sfAction
 {
     public function execute($request)
     {
+        $conection = Propel::getConnection();
+        
         //set content type to json
         $this->getResponse()->setContentType("application/json");
+        
+        //make fields array
+        $query0 = "select config_field.id, CONCAT(config_field_category.name,\"_\",config_field.name ,'=') as value
+        from config_field
+        left join config_field_category on (config_field_category.id = config_field.category_id)";
+        
+        $statement0 = $conection->prepare($query0);
+        $statement0->execute();
+        $resultsTemp = $statement0->fetchAll(PDO::FETCH_ASSOC);  
+        
+        $fieldIdValueArr = array();
+        foreach ($resultsTemp as $result)
+        {
+            $fieldIdValueArr[$result['id']] = $result['value'];
+        }//
         
         //get brands
         $this->brandsParam = $this->getRequestParameter('brands');
         
-        $conection = Propel::getConnection();
+        
         
         $query = "SELECT config.id, config.config_name, model.model_name, series.series_name, 
                   brand.brand_name, field_value.id as field_value_id, field_value.field_id,
-                  field_value.value, config_field.name as config_field_name, config_field.html_comment
+                  config_field.name as config_field_name, config_field.html_comment, GROUP_CONCAT(CONCAT(config_field_category.name,\"_\",config_field.name ,'=',field_value.value) SEPARATOR '|') as value
                   FROM config
 
                   LEFT JOIN model ON (config.model_id=model.id)
@@ -22,6 +39,7 @@ class dosearchAction extends sfAction
                   LEFT JOIN brand ON (series.brand_id=brand.id)
                   LEFT JOIN field_value ON (field_value.config_id = config.id)
                   LEFT JOIN config_field ON (config_field.id = field_value.field_id)
+                  LEFT JOIN config_field_category ON (config_field.category_id = config_field_category.id)
                   ";
         
         $firsWhere = true;
@@ -47,91 +65,38 @@ class dosearchAction extends sfAction
         }
         
         //add fields parameter to query
-        /*$this->fields = $this->getRequestParameter('fields');
-        if (count($this->fields) > 0)
-        {
-            if ($firsWhere)
-            {
-                $query .= "WHERE ";
-            }
-            else
-            {
-                $query .= "AND ";
-            }
-            $query .= " config.id IN (  SELECT field_value.config_id FROM field_value";
-            $firstWhere = false;
-            
-            $firstWhere2 = true;
-            
-            foreach($this->fields as $keyField=>$values)
-            {
-                if ($firstWhere2)
-                    $query .= " WHERE ";
-                else
-                    $query .= " OR ";
-                
-                $firstWhere2 = false;
-                
-                $query .= " (field_id = ".$keyField." AND value IN ( ";
-                $first = true;
-                foreach ($values as $value)
-                {
-                    if(!$first)
-                    {
-                        $query .= ", ";
-                    }
-                    $query .= "'$value'";
-                    $first = false;
-                }
-                $query .= " ) ";
-                $query .= " ) ";
-                
-            }
-            $query .= " ) ";
-        }*/
+        
+        $query .= " GROUP BY id";
+        
         $this->fields = $this->getRequestParameter('fields');
         if (count($this->fields) > 0)
         {
-            if ($firsWhere)
-            {
-                $query .= "WHERE ";
-            }
-            else
-            {
-                $query .= "AND ";
-            }
-            $query .= " config.id IN (  SELECT field_value.config_id FROM field_value";
-            $firstWhere = false;
-            
-            $first = true;
-            $query .= " WHERE field_id IN (";
+            $query .= " HAVING (";
+            $firstItem = true;
             foreach($this->fields as $keyField=>$values)
             {
-                if(!$first)
+                if(!$firstItem)
                 {
-                    $query .= ", ";
+                    $query .= " AND ";
                 }
-                $query .= $keyField;
-                $first = false;
-            }
-            $query .= ")";
-            
-            $first = true;
-            $query .= " AND value IN ( ";
-            foreach($this->fields as $keyField=>$values)
-            {
+                $query .= " ( ";
+                
+                $firstItem2 = true;
                 foreach ($values as $value)
                 {
-                    if(!$first)
+                    
+                    if (!$firstItem2)
                     {
-                        $query .= ", ";
+                        $query .= " OR ";
                     }
-                    $query .= "'$value'";
-                    $first = false;
-                }                 
+                    
+                    $query .= " value LIKE ( '%".$fieldIdValueArr[$keyField].$value."%' ) ";
+                    $firstItem2 = false;
+                }
+                $query .= " )";
+                $firstItem = false;
             }
-             
-            $query .= " ) ) ";
+            $query .= " )";
         }
         
         $statement = $conection->prepare($query);

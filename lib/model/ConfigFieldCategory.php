@@ -20,7 +20,9 @@ class ConfigFieldCategory extends BaseConfigFieldCategory {
     
     public function getFields(){
         $c = new Criteria();
-        return ConfigFieldPeer::doSelect($c->add(ConfigFieldPeer::CATEGORY_ID,$this->getId()));
+        $c->add(ConfigFieldPeer::CATEGORY_ID,$this->getId());
+        $c->addAscendingOrderByColumn(ConfigFieldPeer::WEIGHT);
+        return ConfigFieldPeer::doSelect($c);
     }
 
     public static function getFieldName($f){

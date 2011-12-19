@@ -56,23 +56,39 @@ class Config extends BaseConfig {
         return $resultStr;        
     }
     
-    
+    public function getConfigFieldValues(){
+        $c = new Criteria();
+        $c->add(FieldValuePeer::CONFIG_ID, $this->getId());
+        $fieldValues = FieldValuePeer::doSelect($c);
+        $resultArr = array();
+        foreach($fieldValues as $v){
+            $field = ConfigFieldPeer::retrieveByPK($v->getFieldId());
+            $resultArr[$field->getId()] = $v->getValue();
+        }
+        return $resultArr;
+    }
+
     public function makeConfigName()
     {
-        $configName = "Config ";
+        $configName = "C: ";
         
-        $fieldIds = array(1, 2, 3, 4);
-        
-        $cFieldValues = new Criteria();
-        $cFieldValues->add(FieldValuePeer::CONFIG_ID, $this->getId());
-        $cFieldValues->add(FieldValuePeer::FIELD_ID, $fieldIds, Criteria::IN);
-        
-        $fieldValues = FieldValuePeer::doSelect($cFieldValues);
-        
-        foreach ($fieldValues as $fieldValue)
-        {
-            $configName .= $fieldValue->getValue()." ,";
-        }        
+        $fieldCats = array(1, 2);
+
+        foreach ($fieldCats as $cid){
+            $fieldCat = ConfigFieldCategoryPeer::retrieveByPK($cid);
+            $fields = $fieldCat->getFields();
+            
+            foreach($fields as $f){
+                $cFieldValues = new Criteria();
+                $cFieldValues->add(FieldValuePeer::CONFIG_ID, $this->getId());
+                $cFieldValues->add(FieldValuePeer::FIELD_ID, $f->getId());
+                $fieldValues = FieldValuePeer::doSelect($cFieldValues);
+
+                foreach($fieldValues as $fieldValue)
+                    $configName .= $fieldValue->getValue()." ";
+            }
+            $configName .= '-';
+        }
         
         return $configName;
     }

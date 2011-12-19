@@ -1,0 +1,86 @@
+#lists{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#lists b{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#lists .del{
+    width: 12px;
+    height: 12px;
+    float: right;
+}
+
+#lists .del img{
+    width: 10px;
+    height: 10px;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+#lists h3{
+    font-size: 16px;
+    border-bottom: thin solid;
+    margin: 2px;
+}
+
+#lists .box1{
+    width: 130px;
+    float: left;
+}
+
+#lists .box2{
+    width: 300px;
+    float: left;
+}
+
+#lists ul{
+    padding: 0;
+    margin: 0;
+}
+
+#lists li{
+    cursor: pointer; cursor: hand;
+    float: left;
+    clear: both;
+    width: 95%;
+    padding: 2px;
+    list-style: none;
+}
+
+#lists li:hover{
+    background-color: skyblue;
+}
+
+#lists .sel{
+    background-color: blue;
+    color: white;
+}
+
+#lists .box3{
+    width: 100%;
+    clear: both;
+    border: thin solid black;
+    padding: 2px;
+    margin-top: 10px;
+    overflow: auto;
+}
+
+#lists .gif-loader{
+    border: none;
+    text-align: center;
+    margin-left: 40%;
+}
+
+#config-editor table{
+    float: left;
+    width: 33%;
+}
+
+#config-editor input{
+    width: 100px;
+}

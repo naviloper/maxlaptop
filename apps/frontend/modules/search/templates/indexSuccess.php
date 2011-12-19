@@ -1,4 +1,4 @@
-<script>
+ï»¿<script>
     
 $('document').ready(function(){
     $(function() {
@@ -39,7 +39,7 @@ $('document').ready(function(){
 		
     </div>
         
-        <input type="button" value="ÌÓÊÌæ" id="search-btn"></input>
+        <input type="button" value="Ø¬Ø³ØªØ¬Ùˆ" id="search-btn"></input>
         
     </form>  
     

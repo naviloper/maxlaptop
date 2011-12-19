@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 
 /**
  * search actions.
@@ -25,7 +25,7 @@ class searchActions extends sfActions
       
       $tabIndex = 1;
       
-      $this->tabs[$tabIndex]['title'] = 'ÈÑäÏ';
+      $this->tabs[$tabIndex]['title'] = 'Ø¨Ø±Ù†Ø¯';
       $this->tabs[$tabIndex]['content'] = $this->renderBrands($this->brands);
       
       ++$tabIndex;
